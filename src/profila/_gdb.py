@@ -50,7 +50,7 @@ async def _sample(process: Process) -> AsyncIterable[Optional[list[Frame]]]:
         process.stdin.write(b"-exec-interrupt\n")
         await _read_until_done(process)
 
-        process.stdin.write(b"-stack-list-frames --no-frame-filters 0 10\n")
+        process.stdin.write(b"-stack-list-frames --no-frame-filters 0 4\n")
         message = await _read_until_done(process)
         if message["payload"] is None or "stack" not in message["payload"]:  # type: ignore
             # Bad read of some sort:
